@@ -1,4 +1,4 @@
-const { tracks } = require('../../data/tracks.json');
+const { tracks } = require('../data/tracks.json');
 
 // GET /song/:songId
 exports.getSongById = (req, res, next) => {
