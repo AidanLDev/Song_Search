@@ -1,0 +1,23 @@
+{
+  "name": "song-search",
+  "version": "1.0.0",
+  "description": "A project created using React for the frontend and a Node API",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd frontend/ && npm install && npm run build && cd ../api && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AidanLDev/Song_Search.git"
+  },
+  "keywords": [],
+  "author": "Aidan Lowson <aidansoftwaredev@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AidanLDev/Song_Search/issues"
+  },
+  "homepage": "https://github.com/AidanLDev/Song_Search#readme"
+}
