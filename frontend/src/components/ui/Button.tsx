@@ -9,7 +9,7 @@ interface Props {
 
 const Button: React.FC<Props> = ({ buttonLabel, handleClick }) => {
   return (
-    <button className='margin-left bg-light bg-primary' onClick={handleClick}>
+    <button className='btn-primary margin-left' onClick={handleClick}>
       {buttonLabel}
     </button>
   );

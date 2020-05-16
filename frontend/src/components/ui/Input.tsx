@@ -16,6 +16,7 @@ const Input: React.FC<Props> = ({ inputValue, handleChange, inputLabel }) => {
         {inputLabel}
       </label>
       <input
+        className='margin-top'
         id={inputLabel}
         type='text'
         value={inputValue}

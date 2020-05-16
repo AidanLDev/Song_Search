@@ -5,12 +5,6 @@ import Button from './ui/Button';
 import List from './ui/List';
 import Heading from './Heading';
 
-interface trackObject {
-  artist: string;
-  title: string;
-  id: number;
-}
-
 const Body: React.FC = () => {
   const [songId, setSongId] = useState<string>('');
   const [searchedSong, setSearchedSong] = useState<string>('');
@@ -34,13 +28,17 @@ const Body: React.FC = () => {
     fetch(`http://localhost:3001/song/${songId}`)
       .then((res) => res.text())
       .then((res) => {
-        const trackObject = JSON.parse(res);
-        if (trackObject.length > 0) {
-          setNotFound(false);
-          setArtist(trackObject[0].artist);
-          setTitle(trackObject[0].title);
-          setTitles([]);
-        } else {
+        try {
+          const trackObject = JSON.parse(res);
+          if (trackObject.length > 0) {
+            setNotFound(false);
+            setArtist(trackObject[0].artist);
+            setTitle(trackObject[0].title);
+            setTitles([]);
+          } else {
+            setNotFound(true);
+          }
+        } catch {
           setNotFound(true);
         }
       });
@@ -50,16 +48,20 @@ const Body: React.FC = () => {
     fetch(`http://localhost:3001/songs/${searchedSong}`)
       .then((res) => res.text())
       .then((res) => {
-        const trackObject = JSON.parse(res);
-        if (trackObject.length > 0) {
-          const titlesArray: string[] = [];
-          trackObject.forEach((track: { title: any }) => {
-            titlesArray.push(track.title);
-          });
-          setNotFound(false);
-          setArtist(trackObject[0].artist);
-          setTitles(titlesArray);
-        } else {
+        try {
+          const trackObject = JSON.parse(res);
+          if (trackObject.length > 0) {
+            const titlesArray: string[] = [];
+            trackObject.forEach((track: { title: any }) => {
+              titlesArray.push(track.title);
+            });
+            setNotFound(false);
+            setArtist(trackObject[0].artist);
+            setTitles(titlesArray);
+          } else {
+            setNotFound(true);
+          }
+        } catch {
           setNotFound(true);
         }
       });
@@ -77,19 +79,16 @@ const Body: React.FC = () => {
             <Input
               handleChange={onIdChange}
               inputValue={songId}
-              inputLabel='Search by Id'
+              inputLabel='Search via Id'
             />
-            <Button handleClick={getTrackById} buttonLabel='Search by Id' />
+            <Button handleClick={getTrackById} buttonLabel='Search' />
             <br />
             <Input
               handleChange={onArtistChange}
               inputValue={searchedSong}
-              inputLabel='Search by Artist'
+              inputLabel='Search Artist'
             />
-            <Button
-              handleClick={getTracksByArtist}
-              buttonLabel='Search by artist'
-            />
+            <Button handleClick={getTracksByArtist} buttonLabel='Search' />
             <div className='text-white-75 font-weight-light mb-5'>
               {artist && !notFound ? (
                 <div>
