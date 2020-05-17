@@ -25,7 +25,7 @@ const Body: React.FC = () => {
   };
 
   const getTrackById = () => {
-    fetch(`http://localhost:3001/songs/id/${songId}`)
+    fetch(`${window.location.origin}/songs/id/${songId}`)
       .then((res) => res.text())
       .then((res) => {
         try {
@@ -45,7 +45,7 @@ const Body: React.FC = () => {
   };
 
   const getTracksByArtist = () => {
-    fetch(`http://localhost:3001/songs/${searchedSong}`)
+    fetch(`${window.location.origin}/songs/${searchedSong}`)
       .then((res) => res.text())
       .then((res) => {
         try {
