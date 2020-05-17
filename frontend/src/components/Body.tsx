@@ -25,7 +25,7 @@ const Body: React.FC = () => {
   };
 
   const getTrackById = () => {
-    fetch(`http://localhost:3001/song/${songId}`)
+    fetch(`http://localhost:3001/songs/id/${songId}`)
       .then((res) => res.text())
       .then((res) => {
         try {

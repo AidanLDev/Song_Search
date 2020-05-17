@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const musicController = require('../controller/music');
 
-// GET /song/:songId
-router.get('/song/:songId', musicController.getSongById);
+// GET /songs/id/:songId
+router.get('/id/:songId', musicController.getSongById);
 
 // GET /songs/:artist
-router.get('/songs/:artist', musicController.getSongByArtist);
+router.get('/:artist', musicController.getSongByArtist);
 
 module.exports = router;
