@@ -73,8 +73,11 @@ const Body: React.FC = () => {
         <div className='row h-100 align-items-center justify-content-center text-center'>
           <Heading headingText='Music Library' />
           <div className='col-lg-8 align-self-baseline'>
-            <p className='text-white-75 font-weight-light mb-5'>
+            <p className='text-white-75 font-weight-meduim mb-5'>
               Search our music catalog
+            </p>
+            <p className='text-white-75 font-weight-light'>
+              IDs range from 1 - 500
             </p>
             <Input
               handleChange={onIdChange}
