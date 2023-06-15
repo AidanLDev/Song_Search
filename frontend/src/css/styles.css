@@ -10507,6 +10507,7 @@ hr.light {
 }
 
 div.masthead {
+  height: 100vh;
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
   background: linear-gradient(
@@ -10627,4 +10628,9 @@ div.masthead h1 {
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.artist-select {
+  display: flex;
+  color: #f4623a;
 }

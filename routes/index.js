@@ -6,6 +6,9 @@ const musicController = require('../controller/music');
 router.get('/id/:songId', musicController.getSongById);
 
 // GET /songs/:artist
-router.get('/:artist', musicController.getSongByArtist);
+router.get('/getartist/:artist', musicController.getSongByArtist);
+
+// GET /songs/all
+router.get('/all', musicController.getAllTracks)
 
 module.exports = router;

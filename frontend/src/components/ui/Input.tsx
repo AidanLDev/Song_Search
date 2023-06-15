@@ -4,9 +4,15 @@ interface Props {
   inputValue: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   inputLabel: string;
+  inputType?: string;
 }
 
-const Input: React.FC<Props> = ({ inputValue, handleChange, inputLabel }) => {
+const Input: React.FC<Props> = ({
+  inputValue,
+  handleChange,
+  inputLabel,
+  inputType,
+}) => {
   return (
     <>
       <label
@@ -18,7 +24,7 @@ const Input: React.FC<Props> = ({ inputValue, handleChange, inputLabel }) => {
       <input
         className='margin-top'
         id={inputLabel}
-        type='text'
+        type={inputType || 'text'}
         value={inputValue}
         onChange={handleChange}
       />
