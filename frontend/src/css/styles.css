@@ -10634,3 +10634,13 @@ div.masthead h1 {
   display: flex;
   color: #f4623a;
 }
+
+.id-input {
+  width: 90%
+}
+
+@media (max-width: 576px) {
+  .id-input {
+    width: 82%;
+  }
+}

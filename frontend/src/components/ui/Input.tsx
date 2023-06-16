@@ -22,11 +22,13 @@ const Input: React.FC<Props> = ({
         {inputLabel}
       </label>
       <input
-        className='margin-top'
+        className='margin-top id-input'
         id={inputLabel}
         type={inputType || 'text'}
         value={inputValue}
         onChange={handleChange}
+        min={1}
+        max={500}
       />
     </>
   );

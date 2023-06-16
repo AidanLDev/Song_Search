@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { TrackObjectKeys, TrackObject } from '../components/Body';
 
 export function useData(url: string) {
-  const [data, setData] = useState<Promise<any>>(null);
+  const [data, setData] =
+    useState<Record<TrackObjectKeys, TrackObject>>();
 
   useEffect(() => {
     let ignore = false;

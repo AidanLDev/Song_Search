@@ -6,6 +6,19 @@ import List from './ui/List';
 import Heading from './Heading';
 import { Select } from '@chakra-ui/react';
 import { useData } from '../hooks/useData';
+export type TrackObjectKeys = 'artist' | 'title' | 'number';
+export interface Tracks {
+  artist: string;
+  title: string;
+  id: number;
+}
+export interface TrackObject {
+  tracks: {
+    artist: string;
+    title: string;
+    id: number;
+  }[];
+}
 
 const Body: React.FC = () => {
   const [songId, setSongId] = useState<string>('');
@@ -18,14 +31,6 @@ const Body: React.FC = () => {
   const onIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue: string = event.target.value;
     setSongId(inputValue);
-  };
-
-  // TODO: Change this into one handleInput function that checks eve
-  const onArtistChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const inputValue: string = event.target.value;
-    setSearchedSong(inputValue);
   };
 
   const getTrackById = () => {
@@ -71,22 +76,19 @@ const Body: React.FC = () => {
       });
   };
 
-  type TrackObjectKeys = 'artist' | 'title' | 'number';
+  const tracks: Record<TrackObjectKeys, TrackObject> | undefined =
+    useData(`${window.location.origin}/songs/all`);
 
-  const allTracks: Promise<
-    Record<
-      TrackObjectKeys,
-      { artist: string; title: string; id: number }[]
-    >
-  > = useData(`${window.location.origin}/songs/all`) || [];
-  console.log(allTracks);
+  let uniqueArtists: string[] = [];
 
-  const uniqueArtists: string[] = [
-    ...new Set(
-      allTracks.map((track: { artist: any }) => track.artist)
-    ),
-  ];
-  console.log(uniqueArtists);
+  // Check if allTracks has comeback as an array before mapping
+  if (Array.isArray(tracks)) {
+    uniqueArtists = [
+      ...new Set<string>(
+        tracks.map((track: { artist: string }) => track.artist)
+      ),
+    ];
+  }
 
   return (
     <div className='masthead'>
@@ -100,37 +102,46 @@ const Body: React.FC = () => {
             <p className='text-white-75 font-weight-light'>
               IDs range from 1 - 500
             </p>
-            <Input
-              handleChange={onIdChange}
-              inputValue={songId}
-              inputLabel='Search via Id'
-              inputType='number'
-            />
-            <Button handleClick={getTrackById} buttonLabel='Search' />
-            <br />
-            {/* <Input
-              handleChange={onArtistChange}
-              inputValue={searchedSong}
-              inputLabel='Search Artist'
-            /> */}
-            <div className='artist-select'>
-              <Select
-                placeholder='Select Artist'
-                colorScheme='#f4623a'
-                onChange={(e: { target: { value: any } }) =>
-                  setSearchedSong(e.target.value)
-                }
-              >
-                {uniqueArtists.map((artist, idx) => (
-                  <option key={`${idx}__${artist}`} value={artist}>
-                    {artist}
-                  </option>
-                ))}
-              </Select>
+            <div>
+              <Input
+                handleChange={onIdChange}
+                inputValue={songId}
+                inputLabel='Search via Id'
+                inputType='number'
+              />
               <Button
-                handleClick={getTracksByArtist}
+                handleClick={getTrackById}
                 buttonLabel='Search'
               />
+            </div>
+            <br />
+            <div className='artist-select'>
+              {!uniqueArtists ? (
+                'Loading...'
+              ) : (
+                <>
+                  <Select
+                    placeholder='Select Artist'
+                    colorScheme='#f4623a'
+                    onChange={(e: { target: { value: any } }) =>
+                      setSearchedSong(e.target.value)
+                    }
+                  >
+                    {uniqueArtists.map((artist, idx) => (
+                      <option
+                        key={`${idx}__${artist}`}
+                        value={artist}
+                      >
+                        {artist}
+                      </option>
+                    ))}
+                  </Select>
+                  <Button
+                    handleClick={getTracksByArtist}
+                    buttonLabel='Search'
+                  />
+                </>
+              )}
             </div>
             <div className='text-white-75 font-weight-light mb-5'>
               {artist && !notFound ? (

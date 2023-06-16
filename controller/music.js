@@ -19,5 +19,5 @@ exports.getSongByArtist = (req, res, next) => {
 //  GET /songs/all
 exports.getAllTracks = (req, res, next) => {
 
-  return res.send({ tracks })
+  return res.send(tracks)
 }
