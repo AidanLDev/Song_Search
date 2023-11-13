@@ -6,7 +6,8 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "vercel-build": "echo building nothing"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
