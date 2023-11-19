@@ -1,20 +1,24 @@
 "use client";
-import styles from "./page.module.css";
 import data from "../public/data/tracks.json";
-import { getAllArtists, getByTitle, getByArtist } from "@/utils/AppUtils";
-import { Box, Button, TextField } from "@mui/material";
+import {
+  getAllArtists,
+  getByArtist,
+  getAllTrackTitles,
+  getByTitle,
+} from "@/utils/AppUtils";
+import { Button } from "@mui/material";
 import { ArtistsDropdown } from "./components/ArtistsDropdown";
 import React, { useState } from "react";
 import { ITrack } from "@/interfaces/tracks";
+import { TrackSearch } from "./components/TrackSearch";
 
 export default function Home() {
   const [openArtistsDropdown, setOpenArtistsDropdown] = useState(false);
-  const [searchedSong, setSearchedSong] = useState("");
   const [activeTracks, setActiveTracks] = useState<
     ITrack[] | ITrack | undefined
   >();
   const allArtists = getAllArtists(data.tracks);
-  const artist = getByArtist(data.tracks, "3am");
+  const allTracks = getAllTrackTitles(data.tracks);
 
   const handleOpenArtistsDropdown = () => {
     setOpenArtistsDropdown(!openArtistsDropdown);
@@ -29,14 +33,8 @@ export default function Home() {
     setOpenArtistsDropdown(false);
   };
 
-  const handleTrackSearch = () => {
-    const tracks = getByTitle(data.tracks, searchedSong);
-    setActiveTracks(tracks);
-    // TODO: Create not found state to display a message if we don't get any results
-  };
-
   return (
-    <main className={styles.main}>
+    <main>
       <Button
         onClick={handleOpenArtistsDropdown}
         aria-expanded={openArtistsDropdown ? "true" : undefined}
@@ -50,23 +48,12 @@ export default function Home() {
         close={handleCloseArtistsDropdown}
         selectArtist={handleSelectArtist}
       />
-      <Box>
-        <TextField
-          label="Search by title"
-          variant="standard"
-          InputLabelProps={{
-            sx: { color: "#fff" },
-          }}
-          sx={{
-            input: { color: "#FFF" },
-          }}
-          value={searchedSong}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchedSong(event.target.value)
-          }
-        />
-        <Button onClick={() => handleTrackSearch()}>Search</Button>
-      </Box>
+      <TrackSearch
+        allTracks={allTracks}
+        getByTitle={getByTitle}
+        setActiveTracks={setActiveTracks}
+        tracks={data.tracks}
+      />
       {activeTracks && Array.isArray(activeTracks) ? (
         // TODO: Make this a component to remove repition
         <div>
