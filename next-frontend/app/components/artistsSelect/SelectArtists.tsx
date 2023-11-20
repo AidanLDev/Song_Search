@@ -3,11 +3,12 @@ import React from "react";
 import { ArtistsDropdown } from "./ArtistsDropdown";
 
 interface ISelectArtists {
-  handleOpenArtistsDropdown: () => void;
+  handleOpenArtistsDropdown:(event: React.MouseEvent<HTMLElement>) => void;
   openArtistsDropdown: boolean;
   allArtists: string[];
   handleCloseArtistsDropdown: () => void;
   handleSelectArtist: (artist: string) => void;
+  anchorEl: null | HTMLElement;
 }
 
 export const SelectArtists = ({
@@ -16,6 +17,7 @@ export const SelectArtists = ({
   allArtists,
   handleCloseArtistsDropdown,
   handleSelectArtist,
+  anchorEl,
 }: ISelectArtists) => {
   return (
     <>
@@ -23,6 +25,9 @@ export const SelectArtists = ({
         onClick={handleOpenArtistsDropdown}
         aria-expanded={openArtistsDropdown ? "true" : undefined}
         aria-haspopup="true"
+        className="text-slate-100"
+        color="primary"
+        variant="outlined"
       >
         Select from all Artists
       </Button>
@@ -31,6 +36,7 @@ export const SelectArtists = ({
         open={openArtistsDropdown}
         close={handleCloseArtistsDropdown}
         selectArtist={handleSelectArtist}
+        anchorEl={anchorEl}
       />
     </>
   );

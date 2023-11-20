@@ -5,6 +5,7 @@ interface IArtistDropdownProps {
   open: boolean;
   close: () => void;
   selectArtist: (artist: string) => void;
+  anchorEl: null | HTMLElement;
 }
 
 export const ArtistsDropdown = ({
@@ -12,9 +13,22 @@ export const ArtistsDropdown = ({
   open,
   close,
   selectArtist,
+  anchorEl,
 }: IArtistDropdownProps) => {
   return (
-    <Menu open={open} onClose={close}>
+    <Menu
+      open={open}
+      onClose={close}
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "center",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "center",
+        horizontal: "center",
+      }}
+    >
       {artists.map((artist, idx) => (
         <MenuItem
           key={`${artist}__${idx}`}
