@@ -42,9 +42,9 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="h-screen overflow-hidden bg-masthead bg-cover bg-no-repeat">
-        <main className="m-14 overflow-hidden">
-          <Stack height="100vh" justifyContent="center">
+      <div className="h-screen overflow-hidden bg-[url('/images/bg-masthead.webp')] bg-cover bg-no-repeat z-10 bg-gray-600 bg-blend-multiply">
+        <main className="m-14 overflow-hidden z-20 flex col justify-center align-middle">
+          <Stack height="100vh" width="40rem" justifyContent="center">
             <SelectArtists
               handleOpenArtistsDropdown={handleOpenArtistsDropdown}
               openArtistsDropdown={openArtistsDropdown}
