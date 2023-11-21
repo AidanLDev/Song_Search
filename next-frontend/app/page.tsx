@@ -42,50 +42,47 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <main className="m-14 overflow-hidden">
-        <Image
-          src="/images/bg-masthead.webp"
-          alt="Background image of musical instruments"
-          layout="fill"
-        />
-        <Stack height="100vh" justifyContent="center">
-          <SelectArtists
-            handleOpenArtistsDropdown={handleOpenArtistsDropdown}
-            openArtistsDropdown={openArtistsDropdown}
-            allArtists={allArtists}
-            handleCloseArtistsDropdown={handleCloseArtistsDropdown}
-            handleSelectArtist={handleSelectArtist}
-            anchorEl={anchorEl}
-          />
-          <TrackSearch
-            allTracks={allTracks}
-            getByTitle={getByTitle}
-            setActiveTracks={setActiveTracks}
-            tracks={data.tracks}
-          />
+      <div className="h-screen overflow-hidden bg-masthead bg-cover bg-no-repeat">
+        <main className="m-14 overflow-hidden">
+          <Stack height="100vh" justifyContent="center">
+            <SelectArtists
+              handleOpenArtistsDropdown={handleOpenArtistsDropdown}
+              openArtistsDropdown={openArtistsDropdown}
+              allArtists={allArtists}
+              handleCloseArtistsDropdown={handleCloseArtistsDropdown}
+              handleSelectArtist={handleSelectArtist}
+              anchorEl={anchorEl}
+            />
+            <TrackSearch
+              allTracks={allTracks}
+              getByTitle={getByTitle}
+              setActiveTracks={setActiveTracks}
+              tracks={data.tracks}
+            />
 
-          {activeTracks && Array.isArray(activeTracks) ? (
-            // TODO: Make this a component to remove repition
-            <div style={{ color: "#fff", position: "relative" }}>
-              {<p>{activeTracks[0].artist}</p>}
-              {activeTracks.map((track) => (
-                <div key={track.id}>
-                  <span>{track.title}</span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            activeTracks && (
+            {activeTracks && Array.isArray(activeTracks) ? (
+              // TODO: Make this a component to remove repition
               <div style={{ color: "#fff", position: "relative" }}>
-                <p>{activeTracks.artist}</p>
-                <div>
-                  <span>{activeTracks.title}</span>
-                </div>
+                {<p>{activeTracks[0].artist}</p>}
+                {activeTracks.map((track) => (
+                  <div key={track.id}>
+                    <span>{track.title}</span>
+                  </div>
+                ))}
               </div>
-            )
-          )}
-        </Stack>
-      </main>
+            ) : (
+              activeTracks && (
+                <div style={{ color: "#fff", position: "relative" }}>
+                  <p>{activeTracks.artist}</p>
+                  <div>
+                    <span>{activeTracks.title}</span>
+                  </div>
+                </div>
+              )
+            )}
+          </Stack>
+        </main>
+      </div>
     </ThemeProvider>
   );
 }

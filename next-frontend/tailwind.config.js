@@ -5,7 +5,11 @@ module.exports = {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'masthead': "url('/images/bg-masthead.webp')",
+      }
+    },
   },
   plugins: [],
 }
