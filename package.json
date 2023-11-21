@@ -1,5 +1,10 @@
 {
-  "name": "next-frontend",
+  "name": "song_search",
+  "author": {
+    "name": "Aidan Lowson",
+    "email": "dev@aidanlowson.com",
+    "url": "https://aidanlowson.com"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
