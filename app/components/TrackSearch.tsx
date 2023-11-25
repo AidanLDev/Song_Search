@@ -20,7 +20,7 @@ export const TrackSearch = ({
   return (
     <Autocomplete
       options={allTracks}
-      onChange={(event: any, newValue: string | null) => {
+      onChange={(_event: any, newValue: string | null) => {
         const selectedTrack = newValue;
         if (selectedTrack !== null) {
           const artistInformation = getByTitle(tracks, selectedTrack);
@@ -31,9 +31,6 @@ export const TrackSearch = ({
         <TextField
           label="Search by title"
           variant="standard"
-          // InputLabelProps={{
-          //   sx: { color: "#fff" },
-          // }}
           sx={{
             input: { color: "#FFF" },
             color: "#fff",
